@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxa de Suicídio Masculino - Análise Estatística</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255,255,255,0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .grupo-info {
+            background: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .grupo-info h3 {
+            color: #34495e;
+            margin-bottom: 0.5rem;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.95);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(52,152,219,0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .fatores-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .fator-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #e74c3c;
+        }
+
+        .fator-card h4 {
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+        }
+
+        .prevention-list {
+            list-style: none;
+        }
+
+        .prevention-list li {
+            background: #2ecc71;
+            color: white;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(46,204,113,0.3);
+        }
+
+        .cvv-link {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cvv-link:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(231,76,60,0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .fatores-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Taxa de Suicídio Masculino</h1>
+            <p class="subtitle">Análise Estatística e Fatores Contribuintes</p>
+            
+            <div class="grupo-info">
+                <h3>🧑‍🎓 2° ano A - Itinerário: Exatas</h3>
+                <p><strong>Grupo:</strong> Nicolas Noronha, Davi Schnitman, Rafael Berlink, Enzo Borges, Bruno</p>
+                <p><strong>Orientador:</strong> Alberto | <strong>Área:</strong> Matemática - Porcentagem</p>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2>🎯 Problema de Pesquisa</h2>
+            <p><strong>"Por que os homens apresentam taxas de suicídio mais altas do que as mulheres, mesmo quando as mulheres relatam mais casos de sofrimento emocional e tentativas?"</strong></p>
+        </div>
+
+        <div class="section">
+            <h2>📈 Dados Estatísticos (Brasil - 2022)</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">78%</div>
+                    <div class="stat-label">Dos suicídios são homens</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4x</div>
+                    <div class="stat-label>Mais suicídios que mulheres</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">14.682</div>
+                    <div class="stat-label>Total de suicídios masculinos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">22,3/100k</div>
+                    <div class="stat-label>Taxa homens (vs 5,6 mulheres)</div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Gênero</th>
+                        <th>Total Suicídios</th>
+                        <th>Taxa/100.000</th>
+                        <th>Porcentagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #3498db; color: white;">
+                        <td><strong>Homens</strong></td>
+                        <td><strong>14.682</strong></td>
+                        <td><strong>22,3</strong></td>
+                        <td><strong>78%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Mulheres</td>
+                        <td>4.200</td>
+                        <td>5,6</td>
+                        <td>22%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🔬 Hipótese do Estudo</h2>
+            <blockquote style="background: #f8f9fa; padding: 2rem; border-left: 5px solid #3498db; margin: 1rem 0;">
+                <p><em>"Os homens cometem mais suicídio do que as mulheres devido a fatores como maior dificuldade em expressar emoções, menor busca por ajuda psicológica, pressão social para manter uma imagem de 'força' e maior utilização de métodos mais letais."</em></p>
+            </blockquote>
+        </div>
+
+        <div class="section">
+            <h2>💡 Principais Fatores Contribuintes</h2>
+            <div class="fatores-list">
+                <div class="fator-card">
+                    <h4>🚫 Dificuldade em Expressar Emoções</h4>
+                    <p>Homens são socialmente condicionados a reprimir sentimentos, o que impede identificação precoce de problemas mentais.</p>
+                </div>
+                <div class="fator-card">
+                    <h4>🩺 Menor Busca por Ajuda</h4>
+                    <p>Só 25% dos homens com depressão buscam tratamento vs 40% das mulheres.</p>
+                </div>
+                <div class="fator-card">
+                    <h4>💪 Pressão Social por "Força"</h4>
+                    <p>Expectativa cultural de masculinidade tóxica impede vulnerabilidade emocional.</p>
+                </div>
+                <div class="fator-card">
+                    <h4>⚠️ Métodos Mais Letais</h4>
+                    <p>Homens usam métodos violentos (tiro, enforcamento) com 90% de letalidade vs 40% das tentativas femininas.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Objetivos do Projeto</h2>
+            <h3>Objetivo Geral</h3>
+            <p><strong>Analisar a taxa de suicídio masculino, buscando compreender os principais fatores que contribuem para sua maior ocorrência em relação às mulheres.</strong></p>
+            
+            <h3>Objetivos Específicos</h3>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>Identificar e analisar dados estatísticos sobre o suicídio masculino</li>
+                <li>Comparar as taxas de suicídio entre homens e mulheres</li>
+                <li>Investigar fatores sociais, culturais e psicológicos relacionados</li>
+                <li>Compreender a relação entre saúde mental e comportamento masculino</li>
+                <li>Discutir influência do preconceito e dificuldade de expressão emocional</li>
+                <li>Avaliar formas de prevenção e conscientização</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🛡️ Medidas de Prevenção</h2>
+            <ul class="prevention-list">
+                <li>📢 <strong>Campanhas de conscientização</strong> específicas para homens</li>
+                <li>🩺 <strong>Acesso facilitado</strong> a serviços psicológicos</li>
+                <li>👥 <strong>Grupos de apoio masculino</strong> sem estigma</li>
+                <li>🎓 <strong>Educação emocional</strong> desde a infância</li>
+                <li>📱 <strong>Linhas de apoio 24h</strong> (CVV: 188)</li>
+            </ul>
+            
+            <a href="https://www.cvv.org.br/" target="_blank" class="cvv-link">🆘 Precisa de ajuda? Ligue 188 (CVV)</a>
+        </div>
+
+        <footer>
+            <p>Projeto desenvolvido pelos alunos do 2° ano A - 2024</p>
+            <p>💙 Setembro Amarelo - Vamos falar sobre prevenção ao suicídio</p>
+        </footer>
+    </div>
+</body>
+</html>
